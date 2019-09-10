@@ -12,6 +12,7 @@
 		63E8043923277F6900287C62 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63E8043723277F6900287C62 /* Main.storyboard */; };
 		63E8043B23277F6900287C62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63E8043A23277F6900287C62 /* Assets.xcassets */; };
 		63E8043E23277F6900287C62 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63E8043C23277F6900287C62 /* LaunchScreen.storyboard */; };
+		63E804472327821600287C62 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E804462327821600287C62 /* LoginController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		63E8043A23277F6900287C62 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63E8043D23277F6900287C62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63E8043F23277F6900287C62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		63E804462327821600287C62 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +56,23 @@
 		63E8043223277F6900287C62 /* VoonChatApp */ = {
 			isa = PBXGroup;
 			children = (
+				63E80445232781DD00287C62 /* Controller */,
 				63E8043323277F6900287C62 /* AppDelegate.swift */,
-				63E8043523277F6900287C62 /* ViewController.swift */,
 				63E8043723277F6900287C62 /* Main.storyboard */,
 				63E8043A23277F6900287C62 /* Assets.xcassets */,
 				63E8043C23277F6900287C62 /* LaunchScreen.storyboard */,
 				63E8043F23277F6900287C62 /* Info.plist */,
 			);
 			path = VoonChatApp;
+			sourceTree = "<group>";
+		};
+		63E80445232781DD00287C62 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				63E8043523277F6900287C62 /* ViewController.swift */,
+				63E804462327821600287C62 /* LoginController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -136,6 +147,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				63E8043623277F6900287C62 /* ViewController.swift in Sources */,
+				63E804472327821600287C62 /* LoginController.swift in Sources */,
 				63E8043423277F6900287C62 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
