@@ -50,7 +50,7 @@ class LoginController: UIViewController {
         let tf = UITextField()
         tf.placeholder = "Password"
         tf.translatesAutoresizingMaskIntoConstraints = false
-        
+        tf.isSecureTextEntry = true
         return tf
     }()
 
