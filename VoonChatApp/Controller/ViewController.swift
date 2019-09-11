@@ -15,10 +15,12 @@ class ViewController: UITableViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "M", style: .plain, target: self, action: #selector(handleNewMessage))
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
         
         checkIfUserIsLoggedIn()
+        
         
     }
     
@@ -42,6 +44,11 @@ class ViewController: UITableViewController {
         }
     }
     
+    @objc func handleNewMessage() {
+        let newMessageController = MessagesTableviewController()
+        let navController = UINavigationController(rootViewController: newMessageController)
+        present(navController, animated: true, completion: nil)
+    }
 
     @objc func handleLogout() {
         
