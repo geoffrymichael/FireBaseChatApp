@@ -28,10 +28,35 @@ class LoginController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitleColor(UIColor.white, for: .normal)
         
-        button.addTarget(self, action: #selector(handleRegister), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleLoginRegister), for: .touchUpInside)
         
         return button
     }()
+    
+    
+    @objc func handleLoginRegister() {
+        if loginRegisterSegementedControl.selectedSegmentIndex == 0 {
+            handleLogin()
+        } else {
+            handleRegister()
+        }
+    }
+    
+    func handleLogin() {
+        guard let email = emailTextField.text, let password = passwordTextField.text else {
+            return
+        }
+        
+        Auth.auth().signIn(withEmail: email, password: password) { (User, error) in
+            if error != nil {
+                print(error as Any)
+                return
+                
+            }
+            
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
     
     @objc func handleRegister() {
         guard let email = emailTextField.text, let password = passwordTextField.text, let name = nameTextField.text else {
@@ -61,6 +86,7 @@ class LoginController: UIViewController {
                     return
                 }
                 
+                self.dismiss(animated: true, completion: nil)
                 print("User saved succesfully")
             })
             
