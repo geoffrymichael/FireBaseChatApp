@@ -7,15 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F261507E516E6D1121D161C /* Pods_VoonChatApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5501C9A5F403F965A3CCB8B4 /* Pods_VoonChatApp.framework */; };
 		63E8043423277F6900287C62 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E8043323277F6900287C62 /* AppDelegate.swift */; };
 		63E8043623277F6900287C62 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E8043523277F6900287C62 /* ViewController.swift */; };
 		63E8043923277F6900287C62 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63E8043723277F6900287C62 /* Main.storyboard */; };
 		63E8043B23277F6900287C62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63E8043A23277F6900287C62 /* Assets.xcassets */; };
 		63E8043E23277F6900287C62 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63E8043C23277F6900287C62 /* LaunchScreen.storyboard */; };
 		63E804472327821600287C62 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E804462327821600287C62 /* LoginController.swift */; };
+		63E80449232847FD00287C62 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 63E80448232847FD00287C62 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0D0BF1A3273E7B9D81AE6548 /* Pods-VoonChatApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VoonChatApp.debug.xcconfig"; path = "Target Support Files/Pods-VoonChatApp/Pods-VoonChatApp.debug.xcconfig"; sourceTree = "<group>"; };
+		5501C9A5F403F965A3CCB8B4 /* Pods_VoonChatApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VoonChatApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		62BDDA65FA9EE56A1AF9C5F7 /* Pods-VoonChatApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VoonChatApp.release.xcconfig"; path = "Target Support Files/Pods-VoonChatApp/Pods-VoonChatApp.release.xcconfig"; sourceTree = "<group>"; };
 		63E8043023277F6900287C62 /* VoonChatApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VoonChatApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63E8043323277F6900287C62 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63E8043523277F6900287C62 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -24,6 +29,7 @@
 		63E8043D23277F6900287C62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63E8043F23277F6900287C62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		63E804462327821600287C62 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		63E80448232847FD00287C62 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F261507E516E6D1121D161C /* Pods_VoonChatApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +49,8 @@
 			children = (
 				63E8043223277F6900287C62 /* VoonChatApp */,
 				63E8043123277F6900287C62 /* Products */,
+				DAE2CFAA7F00C8B752EAE820 /* Pods */,
+				BF893FFA2BD339AD55AFD6ED /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -61,6 +70,7 @@
 				63E8043723277F6900287C62 /* Main.storyboard */,
 				63E8043A23277F6900287C62 /* Assets.xcassets */,
 				63E8043C23277F6900287C62 /* LaunchScreen.storyboard */,
+				63E80448232847FD00287C62 /* GoogleService-Info.plist */,
 				63E8043F23277F6900287C62 /* Info.plist */,
 			);
 			path = VoonChatApp;
@@ -75,6 +85,23 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		BF893FFA2BD339AD55AFD6ED /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5501C9A5F403F965A3CCB8B4 /* Pods_VoonChatApp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DAE2CFAA7F00C8B752EAE820 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0D0BF1A3273E7B9D81AE6548 /* Pods-VoonChatApp.debug.xcconfig */,
+				62BDDA65FA9EE56A1AF9C5F7 /* Pods-VoonChatApp.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -82,9 +109,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 63E8044223277F6900287C62 /* Build configuration list for PBXNativeTarget "VoonChatApp" */;
 			buildPhases = (
+				7493986C1D6D3FF3862FA269 /* [CP] Check Pods Manifest.lock */,
 				63E8042C23277F6900287C62 /* Sources */,
 				63E8042D23277F6900287C62 /* Frameworks */,
 				63E8042E23277F6900287C62 /* Resources */,
+				607B3F8DBE617A051B9526D9 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -134,12 +163,64 @@
 			buildActionMask = 2147483647;
 			files = (
 				63E8043E23277F6900287C62 /* LaunchScreen.storyboard in Resources */,
+				63E80449232847FD00287C62 /* GoogleService-Info.plist in Resources */,
 				63E8043B23277F6900287C62 /* Assets.xcassets in Resources */,
 				63E8043923277F6900287C62 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		607B3F8DBE617A051B9526D9 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-VoonChatApp/Pods-VoonChatApp-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VoonChatApp/Pods-VoonChatApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7493986C1D6D3FF3862FA269 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-VoonChatApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		63E8042C23277F6900287C62 /* Sources */ = {
@@ -292,6 +373,7 @@
 		};
 		63E8044323277F6900287C62 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0D0BF1A3273E7B9D81AE6548 /* Pods-VoonChatApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -310,6 +392,7 @@
 		};
 		63E8044423277F6900287C62 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 62BDDA65FA9EE56A1AF9C5F7 /* Pods-VoonChatApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>766122634118-r11bi10ij5tbeftq1krna86saa69m8up.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.766122634118-r11bi10ij5tbeftq1krna86saa69m8up</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDthDPmJapOlSoHxsYbLnLnDvzeilcTIAI</string>
+	<key>GCM_SENDER_ID</key>
+	<string>766122634118</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>grofulet.VoonChatApp</string>
+	<key>PROJECT_ID</key>
+	<string>fir-test-9081b</string>
+	<key>STORAGE_BUCKET</key>
+	<string>fir-test-9081b.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:766122634118:ios:63c0e286494b598a4eda07</string>
+	<key>DATABASE_URL</key>
+	<string>https://fir-test-9081b.firebaseio.com</string>
+</dict>
+</plist>
