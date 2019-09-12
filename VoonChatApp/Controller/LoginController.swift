@@ -95,21 +95,28 @@ class LoginController: UIViewController {
     }
     
     
-    let logo: UIImageView = {
+   lazy var logo: UIImageView = {
         let logoView = UIImageView()
         logoView.image = UIImage(named: "magnum")
     
         logoView.translatesAutoresizingMaskIntoConstraints = false
         
         
+        logoView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleLogoTap)))
         
-//        logoView.contentMode = .scaleAspectFill
-        logoView.clipsToBounds = true
+        logoView.contentMode = .scaleAspectFill
+        
+        logoView.isUserInteractionEnabled = true
+
         
         
         
         return logoView
     }()
+    
+    
+    
+    
     
     let nameTextField: UITextField = {
         let tf = UITextField()
@@ -212,8 +219,8 @@ class LoginController: UIViewController {
     func setupLogo() {
         logo.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         logo.bottomAnchor.constraint(equalTo: loginRegisterSegementedControl.topAnchor, constant: -12).isActive = true
-        logo.widthAnchor.constraint(equalToConstant: 150)
-        logo.heightAnchor.constraint(equalToConstant: 150)
+        logo.widthAnchor.constraint(equalToConstant: 50)
+        logo.heightAnchor.constraint(equalToConstant: 50)
         
     }
     
