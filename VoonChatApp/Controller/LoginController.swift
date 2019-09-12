@@ -71,29 +71,67 @@ class LoginController: UIViewController {
                 return
             }
             
+            
             guard let uid = User?.user.uid else {
                 return
             }
             
-            let ref = Database.database().reference(fromURL: "https://fir-test-9081b.firebaseio.com/")
-            let usersReference = ref.child("users").child(uid)
+            //Successfully registered new user
             
-            let values = ["name": name, "email": email]
-            usersReference.updateChildValues(values, withCompletionBlock: { (error, ref) in
-                
-                if error != nil {
-                    print(error as Any)
-                    return
+            //Creates a unique userid using a timestamp
+            let imageName = NSUUID().uuidString
+            
+            let storage = Storage.storage().reference().child("profileImages").child("\(imageName).png")
+            
+            if let uploadData = self.logo.image {
+                if let data = uploadData.pngData() {
+                    storage.putData(data, metadata: nil, completion: { (metadata, error) in
+                        
+                        if error != nil {
+                            print(error as Any)
+                            return
+                        }
+                        
+                        storage.downloadURL(completion: { (url, error) in
+                            if error != nil {
+                                print(error as Any)
+                                return
+                            }
+                            
+                            if let profileUrl = url?.absoluteString {
+                                let values = ["name": name, "email": email, "profileImageUrl": profileUrl] as [String : Any]
+                                
+                                self.saveUserToDatabase(uid: uid, values: values as [String : AnyObject])
+
+                            }
+                            
+                        })
+                        
+                    })
+
                 }
-                
-                self.dismiss(animated: true, completion: nil)
-                print("User saved succesfully")
-            })
-            
+
+            }
+
         }
         
     }
     
+    private func saveUserToDatabase(uid: String, values: [String: AnyObject]) {
+        let ref = Database.database().reference(fromURL: "https://fir-test-9081b.firebaseio.com/")
+        let usersReference = ref.child("users").child(uid)
+        
+        usersReference.updateChildValues(values, withCompletionBlock: { (error, ref) in
+            
+            if error != nil {
+                print(error as Any)
+                return
+            }
+            
+            self.dismiss(animated: true, completion: nil)
+            print("User saved succesfully")
+        })
+    }
     
    lazy var logo: UIImageView = {
         let logoView = UIImageView()
@@ -219,8 +257,8 @@ class LoginController: UIViewController {
     func setupLogo() {
         logo.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         logo.bottomAnchor.constraint(equalTo: loginRegisterSegementedControl.topAnchor, constant: -12).isActive = true
-        logo.widthAnchor.constraint(equalToConstant: 50)
-        logo.heightAnchor.constraint(equalToConstant: 50)
+        logo.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        logo.heightAnchor.constraint(equalToConstant: 100).isActive = true
         
     }
     

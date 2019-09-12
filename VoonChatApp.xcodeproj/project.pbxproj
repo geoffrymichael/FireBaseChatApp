@@ -83,7 +83,6 @@
 				63E80445232781DD00287C62 /* Controller */,
 				63E8043323277F6900287C62 /* AppDelegate.swift */,
 				63E8043723277F6900287C62 /* Main.storyboard */,
-				6319DCBB2329E0FA00B136C0 /* LoginController+handlers.swift */,
 				63E8043A23277F6900287C62 /* Assets.xcassets */,
 				63E8043C23277F6900287C62 /* LaunchScreen.storyboard */,
 				63E80448232847FD00287C62 /* GoogleService-Info.plist */,
@@ -98,6 +97,7 @@
 				63E8043523277F6900287C62 /* ViewController.swift */,
 				63E804462327821600287C62 /* LoginController.swift */,
 				6319DCB62328AFEF00B136C0 /* MessagesTableviewController.swift */,
+				6319DCBB2329E0FA00B136C0 /* LoginController+handlers.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";

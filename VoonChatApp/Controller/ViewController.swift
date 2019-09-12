@@ -14,6 +14,7 @@ class ViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+//        self.navigationItem.title = "test"
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "M", style: .plain, target: self, action: #selector(handleNewMessage))
         
@@ -32,7 +33,7 @@ class ViewController: UITableViewController {
             
         } else {
             let uid = Auth.auth().currentUser?.uid
-            Database.database().reference().child("users").child(uid!).observe(.value, with: { (snapshot) in
+             Database.database().reference().child("users").child(uid!).observe(.value, with: { (snapshot) in
                 
                 if let dictionary = snapshot.value as? [String: AnyObject] {
                     self.navigationItem.title = dictionary["name"] as? String

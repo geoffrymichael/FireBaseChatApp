@@ -38,6 +38,8 @@ class MessagesTableviewController: UITableViewController {
                 
                 user.name = dictionary["name"] as? String
                 user.email = dictionary["email"] as? String
+                user.profiliImageUrl = dictionary["profileImageUrl"] as? String
+                
                 self.users.append(user)
                 
                 
