@@ -70,19 +70,22 @@ class MessagesTableviewController: UITableViewController {
         cell.textLabel?.text = user.name
         cell.detailTextLabel?.text = user.email
         
-        //Wow. Organically created this data pull statement myself. I will probably change it with tutorial, but it was nice I was able to do it through my own knowledge without being walked through it. 
-        DispatchQueue.global(qos: .userInitiated).async {
-            if let profileImage = user.profiliImageUrl {
-                if let data = try? Data(contentsOf: URL(string: profileImage)!) {
-                    if let image = UIImage(data: data) {
-                        DispatchQueue.main.async {
-                            cell.profileImageView.image = image
-                            tableView.reloadData()
-                        }
-                    }
-                }
-            }
-        }
+        //Wow. Organically created this data pull statement myself. I will probably change it with tutorial, but it was nice I was able to do it through my own knowledge without being walked through it.
+        
+        cell.profileImageView.loadImagesUsingCache(url: user.profiliImageUrl, tableView: tableView)
+        
+//        DispatchQueue.global(qos: .userInitiated).async {
+//            if let profileImage = user.profiliImageUrl {
+//                if let data = try? Data(contentsOf: URL(string: profileImage)!) {
+//                    if let image = UIImage(data: data) {
+//                        DispatchQueue.main.async {
+//                            cell.profileImageView.image = image
+//                            tableView.reloadData()
+//                        }
+//                    }
+//                }
+//            }
+//        }
     
         
         
