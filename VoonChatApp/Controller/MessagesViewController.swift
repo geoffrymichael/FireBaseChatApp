@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MessagesViewController.swift
 //  VoonChatApp
 //
 //  Created by Geoffry Gambling on 9/9/19.
@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class ViewController: UITableViewController {
+class MessagesViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,17 +32,24 @@ class ViewController: UITableViewController {
             perform(#selector(handleLogout), with: nil, afterDelay: 0)
             
         } else {
-            let uid = Auth.auth().currentUser?.uid
-             Database.database().reference().child("users").child(uid!).observe(.value, with: { (snapshot) in
-                
-                if let dictionary = snapshot.value as? [String: AnyObject] {
-                    self.navigationItem.title = dictionary["name"] as? String
-                
-                    
-                }
-                
-            }, withCancel: nil)
+            saveUserAndUpdateNavTitle()
         }
+    }
+    
+    
+    func saveUserAndUpdateNavTitle() {
+        guard let uid = Auth.auth().currentUser?.uid else {
+            return
+        }
+        Database.database().reference().child("users").child(uid).observe(.value, with: { (snapshot) in
+            
+            if let dictionary = snapshot.value as? [String: AnyObject] {
+                self.navigationItem.title = dictionary["name"] as? String
+                
+                
+            }
+            
+        }, withCancel: nil)
     }
     
     @objc func handleNewMessage() {
@@ -62,6 +69,7 @@ class ViewController: UITableViewController {
         
         
         let loginController = LoginController()
+        loginController.messageController = self
         present(loginController, animated: true, completion: nil)
     }
 

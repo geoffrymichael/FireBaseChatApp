@@ -11,6 +11,8 @@ import Firebase
 
 class LoginController: UIViewController {
     
+    var messageController: MessagesViewController?
+    
     let inputsContainerView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.white
@@ -54,6 +56,7 @@ class LoginController: UIViewController {
                 
             }
             
+            self.messageController?.saveUserAndUpdateNavTitle()
             self.dismiss(animated: true, completion: nil)
         }
     }
@@ -128,6 +131,8 @@ class LoginController: UIViewController {
                 return
             }
             
+//            self.messageController?.saveUserAndUpdateNavTitle()
+            self.navigationItem.title = values["name"] as? String
             self.dismiss(animated: true, completion: nil)
             print("User saved succesfully")
         })
