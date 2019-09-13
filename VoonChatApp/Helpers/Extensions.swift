@@ -16,6 +16,8 @@ extension UIImageView{
     
     func loadImagesUsingCache(url: String?, tableView: UITableView) {
         
+        self.image = nil
+        
         if let cachedImage = imageCache.object(forKey: url as AnyObject) as? UIImage {
             self.image = cachedImage
             return

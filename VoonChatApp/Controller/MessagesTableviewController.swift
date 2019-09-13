@@ -123,6 +123,7 @@ class UserCell: UITableViewCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.cornerRadius = 20
         imageView.layer.masksToBounds = true
+        imageView.contentMode = .scaleAspectFill
         
         return imageView
         
