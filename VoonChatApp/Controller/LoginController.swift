@@ -87,7 +87,7 @@ class LoginController: UIViewController {
             let storage = Storage.storage().reference().child("profileImages").child("\(imageName).png")
             
             if let uploadData = self.logo.image {
-                if let data = uploadData.pngData() {
+                if let data = uploadData.jpegData(compressionQuality: 0.1) {
                     storage.putData(data, metadata: nil, completion: { (metadata, error) in
                         
                         if error != nil {
