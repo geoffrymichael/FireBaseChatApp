@@ -105,13 +105,15 @@ class MessagesViewController: UITableViewController {
         self.navigationItem.titleView = titleView
         
         
-        titleView.addGestureRecognizer(UIGestureRecognizer(target: self, action: #selector(showChatController)))
-        titleView.isUserInteractionEnabled = true
+        self.navigationController?.navigationBar.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showChatController)))
+        
+
+        
         
     }
     
     @objc func showChatController() {
-        print("234123421341234213412")
+        print(234)
     }
     
     @objc func handleNewMessage() {
