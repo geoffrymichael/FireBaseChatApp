@@ -131,7 +131,15 @@ class LoginController: UIViewController {
                 return
             }
             
-            self.messageController?.saveUserAndUpdateNavTitle()
+            
+            let user = User()
+            user.name = values["name"] as? String
+            user.email = values["email"] as? String
+            user.profiliImageUrl = values["profileImageUrl"] as? String
+            
+            self.messageController?.setTitleView(user: user)
+            
+//            self.messageController?.saveUserAndUpdateNavTitle()
 //            self.navigationItem.title = values["name"] as? String
             self.dismiss(animated: true, completion: nil)
             print("User saved succesfully")
