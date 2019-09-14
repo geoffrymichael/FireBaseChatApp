@@ -113,7 +113,11 @@ class MessagesViewController: UITableViewController {
     }
     
     @objc func showChatController() {
-        print(234)
+        let vc = ChatLogController(collectionViewLayout: UICollectionViewFlowLayout())
+        
+        navigationController?.pushViewController(vc, animated: true)
+        
+        
     }
     
     @objc func handleNewMessage() {
