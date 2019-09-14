@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4F261507E516E6D1121D161C /* Pods_VoonChatApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5501C9A5F403F965A3CCB8B4 /* Pods_VoonChatApp.framework */; };
 		63127C60232C48D100AFFE05 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63127C5F232C48D100AFFE05 /* Extensions.swift */; };
+		63127C66232C761700AFFE05 /* ChatLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63127C65232C761700AFFE05 /* ChatLogController.swift */; };
 		6319DCB72328AFEF00B136C0 /* MessagesTableviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6319DCB62328AFEF00B136C0 /* MessagesTableviewController.swift */; };
 		6319DCBA2328B71700B136C0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6319DCB92328B71700B136C0 /* User.swift */; };
 		6319DCBC2329E0FA00B136C0 /* LoginController+handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6319DCBB2329E0FA00B136C0 /* LoginController+handlers.swift */; };
@@ -26,6 +27,7 @@
 		5501C9A5F403F965A3CCB8B4 /* Pods_VoonChatApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VoonChatApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		62BDDA65FA9EE56A1AF9C5F7 /* Pods-VoonChatApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VoonChatApp.release.xcconfig"; path = "Target Support Files/Pods-VoonChatApp/Pods-VoonChatApp.release.xcconfig"; sourceTree = "<group>"; };
 		63127C5F232C48D100AFFE05 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		63127C65232C761700AFFE05 /* ChatLogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLogController.swift; sourceTree = "<group>"; };
 		6319DCB62328AFEF00B136C0 /* MessagesTableviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesTableviewController.swift; sourceTree = "<group>"; };
 		6319DCB92328B71700B136C0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		6319DCBB2329E0FA00B136C0 /* LoginController+handlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginController+handlers.swift"; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 				63E804462327821600287C62 /* LoginController.swift */,
 				6319DCB62328AFEF00B136C0 /* MessagesTableviewController.swift */,
 				6319DCBB2329E0FA00B136C0 /* LoginController+handlers.swift */,
+				63127C65232C761700AFFE05 /* ChatLogController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -255,6 +258,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63127C66232C761700AFFE05 /* ChatLogController.swift in Sources */,
 				63E8043623277F6900287C62 /* MessagesViewController.swift in Sources */,
 				6319DCB72328AFEF00B136C0 /* MessagesTableviewController.swift in Sources */,
 				6319DCBC2329E0FA00B136C0 /* LoginController+handlers.swift in Sources */,
