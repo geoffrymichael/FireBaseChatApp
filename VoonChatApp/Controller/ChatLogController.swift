@@ -12,6 +12,13 @@ import Firebase
 class ChatLogController: UICollectionViewController, UITextFieldDelegate {
     
     
+    //Reference to User model so we can access it with this controller
+    var user: User? {
+        didSet {
+            navigationItem.title = user?.name
+        }
+    }
+    
  lazy var inputTextField: UITextField = {
         let textField = UITextField()
     
@@ -29,10 +36,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate {
         super.viewDidLoad()
         
         collectionView?.backgroundColor = UIColor.white
-        
-        self.navigationItem.title   = "Test"
-        
-        
+ 
         setupInputComponents()
         
     }
@@ -85,7 +89,11 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate {
         let ref = Database.database().reference().child("messages")
         let childRef = ref.childByAutoId()
         
-        let values = ["text": inputTextField.text]
+        
+        let toId = user?.id
+        let fromId = Auth.auth().currentUser?.uid
+        let timeStamp: NSNumber = (Date().timeIntervalSince1970 as AnyObject as! NSNumber)
+        let values = ["text": inputTextField.text as Any, "toId": toId as Any, "fromId": fromId as Any, "timeStamp": timeStamp] as [String : Any]
         childRef.updateChildValues(values as [AnyHashable : Any])
     }
     

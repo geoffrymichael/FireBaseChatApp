@@ -10,7 +10,9 @@ import UIKit
 import Firebase
 
 class MessagesViewController: UITableViewController {
-
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -22,7 +24,45 @@ class MessagesViewController: UITableViewController {
         
         checkIfUserIsLoggedIn()
         
+        observeMessages()
         
+        
+    }
+    
+    var messages = [Message]()
+    
+    func observeMessages() {
+        let ref = Database.database().reference().child("messages")
+        ref.observe(.childAdded, with: { (snapshot) in
+        
+            if let dictionary = snapshot.value as? [String: AnyObject] {
+                let message = Message()
+                message.fromId = dictionary["fromId"] as? String
+                message.text = dictionary["text"] as? String
+                message.timeStamp = dictionary["timeStamp"] as? NSNumber
+                
+                self.messages.append(message)
+                
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }
+            
+            
+            
+        }, withCancel: nil)
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return messages.count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cellId")
+        
+        cell.textLabel?.text = messages[indexPath.row].text
+        
+        return cell
     }
     
     func checkIfUserIsLoggedIn() {
@@ -47,6 +87,7 @@ class MessagesViewController: UITableViewController {
 //                self.navigationItem.title = dictionary["name"] as? String
                 
                 let user = User()
+                user.id = snapshot.key
                 user.name = dictionary["name"] as? String
                 user.email = dictionary["email"] as? String
                 user.profiliImageUrl = dictionary["profileImageUrl"] as? String
@@ -105,23 +146,27 @@ class MessagesViewController: UITableViewController {
         self.navigationItem.titleView = titleView
         
         
-        self.navigationController?.navigationBar.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showChatController)))
+//        self.navigationController?.navigationBar.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showChatController)))
         
 
         
         
     }
     
-    @objc func showChatController() {
-        let vc = ChatLogController(collectionViewLayout: UICollectionViewFlowLayout())
+    @objc func showChatController(user: User) {
+        let chatlogController = ChatLogController(collectionViewLayout: UICollectionViewFlowLayout())
         
-        navigationController?.pushViewController(vc, animated: true)
+        chatlogController.user = user
+        navigationController?.pushViewController(chatlogController, animated: true)
         
         
     }
     
     @objc func handleNewMessage() {
         let newMessageController = MessagesTableviewController()
+        
+        //Declaring ourselves as a message controller so that it is not nil when called in our tabelview controller
+        newMessageController.messagesController = self
         let navController = UINavigationController(rootViewController: newMessageController)
         present(navController, animated: true, completion: nil)
     }

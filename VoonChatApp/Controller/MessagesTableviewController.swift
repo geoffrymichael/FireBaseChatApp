@@ -92,8 +92,20 @@ class MessagesTableviewController: UITableViewController {
         return cell
         
     }
+    
+    //Reference to Messages View Controller show we can access showhatController function
+    var messagesController: MessagesViewController?
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        dismiss(animated: true) {
+            
+            let user = self.users[indexPath.row]
+            self.messagesController?.showChatController(user: user)
+        }
+    }
 
 }
+
 
 
 
