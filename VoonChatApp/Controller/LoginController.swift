@@ -121,7 +121,7 @@ class LoginController: UIViewController {
     }
     
     private func saveUserToDatabase(uid: String, values: [String: AnyObject]) {
-        let ref = Database.database().reference(fromURL: "https://fir-test-9081b.firebaseio.com/")
+        let ref = Database.database().reference()
         let usersReference = ref.child("users").child(uid)
         
         usersReference.updateChildValues(values, withCompletionBlock: { (error, ref) in

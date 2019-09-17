@@ -14,7 +14,7 @@ let imageCache = NSCache<AnyObject, AnyObject>()
 
 extension UIImageView{
     
-    func loadImagesUsingCache(url: String?, tableView: UITableView) {
+    func loadImagesUsingCache(url: String?, tableView: UITableView? = nil) {
         
         self.image = nil
         
@@ -30,7 +30,7 @@ extension UIImageView{
                         DispatchQueue.main.async {
                             imageCache.setObject(downloadedImage, forKey: url as AnyObject)
                             self.image = downloadedImage
-                            tableView.reloadData()
+                            tableView?.reloadData()
                         }
                     }
                 }
