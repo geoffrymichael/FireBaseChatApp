@@ -105,10 +105,10 @@ class MessagesViewController: UITableViewController {
         guard let uid = Auth.auth().currentUser?.uid else {
             return
         }
-        Database.database().reference().child("users").child(uid).observe(.value, with: { (snapshot) in
-
+        
+        Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value) { (snapshot) in
             if let dictionary = snapshot.value as? [String: AnyObject] {
-//                self.navigationItem.title = dictionary["name"] as? String
+                //                self.navigationItem.title = dictionary["name"] as? String
                 
                 let user = User()
                 user.id = snapshot.key
@@ -118,10 +118,10 @@ class MessagesViewController: UITableViewController {
                 
                 self.setTitleView(user: user)
                 
-            
+                
             }
-            
-        }, withCancel: nil)
+        }
+//        
     }
     
     
