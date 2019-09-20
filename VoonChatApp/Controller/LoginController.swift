@@ -102,7 +102,7 @@ class LoginController: UIViewController {
                             }
                             
                             if let profileUrl = url?.absoluteString {
-                                let values = ["name": name, "email": email, "profileImageUrl": profileUrl] as [String : Any]
+                                let values = ["name": name, "email": email, "profileImageUrl": profileUrl, "id": uid] as [String : Any]
                                 
                                 self.saveUserToDatabase(uid: uid, values: values as [String : AnyObject])
 
@@ -136,6 +136,7 @@ class LoginController: UIViewController {
             user.name = values["name"] as? String
             user.email = values["email"] as? String
             user.profiliImageUrl = values["profileImageUrl"] as? String
+            user.id = values["id"] as? String
             
             self.messageController?.setTitleView(user: user)
             
