@@ -96,7 +96,11 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate {
         let values = ["text": inputTextField.text! as Any, "toId": toId as Any, "fromId": fromId as Any, "timeStamp": timeStamp] as [String : Any]
         childRef.updateChildValues(values as [AnyHashable : Any])
         
+        let messageRef = Database.database().reference().child("user-messages").child(fromId)
         
+        
+        
+        messageRef.updateChildValues(["sanford": "Test"])
         
     }
     
