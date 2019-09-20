@@ -26,51 +26,104 @@ class MessagesViewController: UITableViewController {
         
         checkIfUserIsLoggedIn()
         
-        observeMessages()
+//        observeMessages()
         
+        observerUserMessages()
         
     }
+    
+    
     
     var messages = [Message]()
     var messagesDictionary = [String: Message]()
     
-    func observeMessages() {
-        let ref = Database.database().reference().child("messages")
-        ref.observe(.childAdded, with: { (snapshot) in
+    
+    func observerUserMessages() {
         
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        
+        let ref = Database.database().reference().child("user-messages").child(uid)
+        
+        ref.observe(.childAdded, with: { (snapshot) in
+           
+            let messageId = snapshot.key
+            let messageRef = Database.database().reference().child("messages").child(messageId)
             
-            //Below we create a dictionary so that messages can be grouped by who they are from. Then we s
-            if let dictionary = snapshot.value as? [String: AnyObject] {
-                let message = Message()
-                message.fromId = dictionary["fromId"] as? String
-                message.text = dictionary["text"] as? String
-                message.timeStamp = dictionary["timeStamp"] as? NSNumber
-                message.toId = dictionary["toId"] as? String
-
+            messageRef.observeSingleEvent(of: .value, with: { (snapshot) in
                 
-                //Sorting messages by timestamp
-                if let toId = message.toId {
-                    self.messagesDictionary[toId] = message
-                    self.messages = Array(self.messagesDictionary.values)
+                //Below we create a dictionary so that messages can be grouped by who they are from. Then we s
+                if let dictionary = snapshot.value as? [String: AnyObject] {
+                    let message = Message()
+                    message.fromId = dictionary["fromId"] as? String
+                    message.text = dictionary["text"] as? String
+                    message.timeStamp = dictionary["timeStamp"] as? NSNumber
+                    message.toId = dictionary["toId"] as? String
                     
                     
-                    self.messages.sort(by: { (message1, message2) -> Bool in
-                       return message1.timeStamp!.intValue > message2.timeStamp!.intValue
-                    })
+                    //Sorting messages by timestamp
+                    if let toId = message.toId {
+                        self.messagesDictionary[toId] = message
+                        self.messages = Array(self.messagesDictionary.values)
+                        
+                        
+                        self.messages.sort(by: { (message1, message2) -> Bool in
+                            return message1.timeStamp!.intValue > message2.timeStamp!.intValue
+                        })
+                    }
+                    
+                    
+                    
+                    
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
                 }
                 
-                
-                
-                
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-            }
-            
-            
-            
+            }, withCancel: nil)
+        
+        
         }, withCancel: nil)
+        
     }
+    
+    
+//    func observeMessages() {
+//        let ref = Database.database().reference().child("messages")
+//        ref.observe(.childAdded, with: { (snapshot) in
+//        
+//            
+//            //Below we create a dictionary so that messages can be grouped by who they are from. Then we s
+//            if let dictionary = snapshot.value as? [String: AnyObject] {
+//                let message = Message()
+//                message.fromId = dictionary["fromId"] as? String
+//                message.text = dictionary["text"] as? String
+//                message.timeStamp = dictionary["timeStamp"] as? NSNumber
+//                message.toId = dictionary["toId"] as? String
+//
+//                
+//                //Sorting messages by timestamp
+//                if let toId = message.toId {
+//                    self.messagesDictionary[toId] = message
+//                    self.messages = Array(self.messagesDictionary.values)
+//                    
+//                    
+//                    self.messages.sort(by: { (message1, message2) -> Bool in
+//                       return message1.timeStamp!.intValue > message2.timeStamp!.intValue
+//                    })
+//                }
+//                
+//                
+//                
+//                
+//                DispatchQueue.main.async {
+//                    self.tableView.reloadData()
+//                }
+//            }
+//            
+//            
+//            
+//        }, withCancel: nil)
+//    }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return messages.count
