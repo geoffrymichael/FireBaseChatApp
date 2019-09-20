@@ -28,7 +28,7 @@ class MessagesViewController: UITableViewController {
         
 //        observeMessages()
         
-        observerUserMessages()
+//        observerUserMessages()
         
     }
     
@@ -179,6 +179,12 @@ class MessagesViewController: UITableViewController {
     
     
     func setTitleView(user: User) {
+        messages.removeAll()
+        messagesDictionary.removeAll()
+        tableView.reloadData()
+        
+        observerUserMessages()
+        
         let titleView = UIView()
         
         titleView.frame = CGRect(x: 0, y: 0, width: 100, height: 40)

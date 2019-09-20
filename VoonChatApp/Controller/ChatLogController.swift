@@ -90,7 +90,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate {
         let childRef = ref.childByAutoId()
         
         
-        let toId = user?.id
+        guard let toId = user?.id else { return }
         let fromId = Auth.auth().currentUser!.uid
         let timeStamp: NSNumber = (Date().timeIntervalSince1970 as AnyObject as! NSNumber)
         let values = ["text": inputTextField.text! as Any, "toId": toId as Any, "fromId": fromId as Any, "timeStamp": timeStamp] as [String : Any]
@@ -115,6 +115,12 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate {
           
             messageRef.updateChildValues([messageId:
                 1])
+            
+            
+            let recipientUserMessageRef = Database.database().reference().child("user-messages").child(toId)
+            
+            recipientUserMessageRef.updateChildValues([messageId: 1])
+            
         }
         
     }
