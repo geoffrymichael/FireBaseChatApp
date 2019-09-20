@@ -94,13 +94,28 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate {
         let fromId = Auth.auth().currentUser!.uid
         let timeStamp: NSNumber = (Date().timeIntervalSince1970 as AnyObject as! NSNumber)
         let values = ["text": inputTextField.text! as Any, "toId": toId as Any, "fromId": fromId as Any, "timeStamp": timeStamp] as [String : Any]
-        childRef.updateChildValues(values as [AnyHashable : Any])
+//        childRef.updateChildValues(values as [AnyHashable : Any])
+//
+//        let messageRef = Database.database().reference().child("user-messages").child(fromId)
+//
+//        let messageId = childRef.key
+//
+//        messageRef.updateChildValues([messageId: "Test"])
         
-        let messageRef = Database.database().reference().child("user-messages").child(fromId)
         
-        
-        
-        messageRef.updateChildValues(["sanford": "Test"])
+        childRef.updateChildValues(values) { (error, ref) in
+            if error != nil {
+                print(error as Any)
+                return
+            }
+            
+            let messageRef = Database.database().reference().child("user-messages").child(fromId)
+            
+            let messageId: String = childRef.key ?? "Default Error"
+          
+            messageRef.updateChildValues([messageId:
+                1])
+        }
         
     }
     
