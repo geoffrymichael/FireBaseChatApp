@@ -17,14 +17,27 @@ class ChatMessageCell: UICollectionViewCell {
         tv.translatesAutoresizingMaskIntoConstraints = false
         tv.text = "place holder"
         tv.font = UIFont.systemFont(ofSize: 16)
+        tv.backgroundColor = UIColor.clear
         
         return tv
  
     }()
     
+    let bubbleView: UIView = {
+        let view = UIView()
+        
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor.blue
+        
+        
+        return view
+        
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        addSubview(bubbleView)
         addSubview(textView)
         
         
@@ -32,6 +45,11 @@ class ChatMessageCell: UICollectionViewCell {
         textView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         textView.widthAnchor.constraint(equalToConstant: 200).isActive = true
         textView.heightAnchor.constraint(equalTo: self.heightAnchor).isActive = true
+        
+        bubbleView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+        bubbleView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        bubbleView.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        bubbleView.heightAnchor.constraint(equalTo: self.heightAnchor).isActive = true
         
     }
     
