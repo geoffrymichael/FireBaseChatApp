@@ -14,5 +14,6 @@ class User: NSObject {
     var email: String?
     var profiliImageUrl: String?
     
+   
     
 }

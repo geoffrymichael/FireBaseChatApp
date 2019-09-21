@@ -9,23 +9,64 @@
 import UIKit
 import Firebase
 
-class ChatLogController: UICollectionViewController, UITextFieldDelegate {
+class ChatLogController: UICollectionViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout {
     
+    let cellId = "cellId"
     
     //Reference to User model so we can access it with this controller
     var user: User? {
         didSet {
             navigationItem.title = user?.name
+            
+            observeMessages()
         }
     }
     
- lazy var inputTextField: UITextField = {
+    var messages = [Message]()
+    
+    func observeMessages() {
+        
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        
+        let userMessagesRef = Database.database().reference().child("user-messages").child(uid)
+        
+        userMessagesRef.observe(.childAdded, with: { (snapshot) in
+            
+            let messageId = snapshot.key
+            
+            let messagesRef = Database.database().reference().child("messages").child(messageId)
+            
+            messagesRef.observeSingleEvent(of: .value, with: { (snapshot) in
+                guard let dictionary = snapshot.value as? [String: AnyObject] else { return }
+                
+                let message = Message()
+                
+                message.fromId = dictionary["fromId"] as? String
+                message.toId = dictionary["toId"] as? String
+                message.text = dictionary["text"] as? String
+                message.timeStamp = dictionary["timeStamp"] as? NSNumber
+                
+                self.messages.append(message)
+                
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
+                
+                
+                
+            }, withCancel: nil)
+            
+            
+        }, withCancel: nil)
+    }
+    
+    lazy var inputTextField: UITextField = {
         let textField = UITextField()
     
         textField.delegate = self
         textField.placeholder = "Enter message..."
         textField.translatesAutoresizingMaskIntoConstraints = false
-        
+    
         
         
         return textField
@@ -37,13 +78,36 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate {
         
         collectionView?.backgroundColor = UIColor.white
  
+        
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+        
+        
         setupInputComponents()
         
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return messages.count
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        
+        
+        
+        cell.backgroundColor = UIColor.blue
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.height, height: 80)
     }
     
     func setupInputComponents() {
         let containerView = UIView()
         containerView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.backgroundColor = UIColor.white
         
         view.addSubview(containerView)
         

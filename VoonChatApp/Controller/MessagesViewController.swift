@@ -142,6 +142,33 @@ class MessagesViewController: UITableViewController {
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let message = messages[indexPath.row]
+        
+        print(indexPath.row)
+        
+        guard let id = message.chatPartnerId() else { return }
+        
+        let ref = Database.database().reference().child("users").child(id)
+        
+        ref.observe(.value, with: { (snapshot) in
+            let dictionary = snapshot.value as! [String: AnyObject]
+            
+            let user = User()
+            
+            user.email = dictionary["email"] as? String
+            user.id = id 
+            user.name = dictionary["name"] as? String
+            user.profiliImageUrl = dictionary["profileImageUrl"] as? String
+            
+            self.showChatController(user: user)
+            
+            
+        }, withCancel: nil)
+        
+//        showChatController(user: User)
+    }
+    
     func checkIfUserIsLoggedIn() {
         //Check if user is not logged in
         if Auth.auth().currentUser?.uid == nil {
