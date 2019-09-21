@@ -18,6 +18,7 @@ class ChatMessageCell: UICollectionViewCell {
         tv.text = "place holder"
         tv.font = UIFont.systemFont(ofSize: 16)
         tv.backgroundColor = UIColor.clear
+        tv.textColor = UIColor.white
         
         return tv
  
