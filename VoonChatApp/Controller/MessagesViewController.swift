@@ -61,8 +61,8 @@ class MessagesViewController: UITableViewController {
                     
                     
                     //Sorting messages by timestamp
-                    if let toId = message.toId {
-                        self.messagesDictionary[toId] = message
+                    if let chatPartnerId = message.chatPartnerId() {
+                        self.messagesDictionary[chatPartnerId] = message
                         self.messages = Array(self.messagesDictionary.values)
                         
                         
