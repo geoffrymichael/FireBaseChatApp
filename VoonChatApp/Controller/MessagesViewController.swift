@@ -70,10 +70,7 @@ class MessagesViewController: UITableViewController {
                             return message1.timeStamp!.intValue > message2.timeStamp!.intValue
                         })
                     }
-                    
-                    
-                    
-                    
+
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
                     }
