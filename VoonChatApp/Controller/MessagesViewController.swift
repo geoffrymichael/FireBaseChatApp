@@ -70,10 +70,10 @@ class MessagesViewController: UITableViewController {
                             return message1.timeStamp!.intValue > message2.timeStamp!.intValue
                         })
                     }
-
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                    }
+                    
+                    self.timer?.invalidate()
+                    self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.handleReloadTable), userInfo: nil, repeats: false)
+                    
                 }
                 
             }, withCancel: nil)
@@ -83,44 +83,15 @@ class MessagesViewController: UITableViewController {
         
     }
     
+    var timer: Timer?
     
-//    func observeMessages() {
-//        let ref = Database.database().reference().child("messages")
-//        ref.observe(.childAdded, with: { (snapshot) in
-//        
-//            
-//            //Below we create a dictionary so that messages can be grouped by who they are from. Then we s
-//            if let dictionary = snapshot.value as? [String: AnyObject] {
-//                let message = Message()
-//                message.fromId = dictionary["fromId"] as? String
-//                message.text = dictionary["text"] as? String
-//                message.timeStamp = dictionary["timeStamp"] as? NSNumber
-//                message.toId = dictionary["toId"] as? String
-//
-//                
-//                //Sorting messages by timestamp
-//                if let toId = message.toId {
-//                    self.messagesDictionary[toId] = message
-//                    self.messages = Array(self.messagesDictionary.values)
-//                    
-//                    
-//                    self.messages.sort(by: { (message1, message2) -> Bool in
-//                       return message1.timeStamp!.intValue > message2.timeStamp!.intValue
-//                    })
-//                }
-//                
-//                
-//                
-//                
-//                DispatchQueue.main.async {
-//                    self.tableView.reloadData()
-//                }
-//            }
-//            
-//            
-//            
-//        }, withCancel: nil)
-//    }
+    @objc func handleReloadTable() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+    
+
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return messages.count
