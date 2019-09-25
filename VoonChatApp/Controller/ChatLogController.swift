@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class ChatLogController: UICollectionViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout {
+class ChatLogController: UICollectionViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     let cellId = "cellId"
     
@@ -226,6 +226,20 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         containerView.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
         
+        let uploadImageView = UIImageView()
+        uploadImageView.image = UIImage(named: "picIcon")
+        uploadImageView.translatesAutoresizingMaskIntoConstraints = false
+        uploadImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handlePicTap)))
+        uploadImageView.isUserInteractionEnabled = true
+        
+        containerView.addSubview(uploadImageView)
+        
+        
+        uploadImageView.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive = true
+        uploadImageView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
+        uploadImageView.widthAnchor.constraint(equalToConstant: 44).isActive = true
+        uploadImageView.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        
         let sendButton = UIButton(type: .system)
         sendButton.setTitle("Send", for: .normal)
         sendButton.translatesAutoresizingMaskIntoConstraints = false
@@ -240,7 +254,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         
         containerView.addSubview(inputTextField)
 
-        inputTextField.leftAnchor.constraint(equalTo: containerView.leftAnchor, constant: 10).isActive = true
+        inputTextField.leftAnchor.constraint(equalTo:uploadImageView.rightAnchor, constant: 10).isActive = true
         inputTextField.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
         inputTextField.rightAnchor.constraint(equalTo: sendButton.leftAnchor).isActive = true
         inputTextField.heightAnchor.constraint(equalTo: containerView.heightAnchor).isActive = true
@@ -256,6 +270,18 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         seperatorLineView.heightAnchor.constraint(equalToConstant: 1).isActive = true
 
 
+    }
+    
+    @objc func handlePicTap() {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        
+        present(imagePicker, animated: true, completion: nil)
+ 
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        print("I selected an image")
     }
     
     @objc func handleSend() {
