@@ -46,46 +46,58 @@ class MessagesViewController: UITableViewController {
         
         ref.observe(.childAdded, with: { (snapshot) in
            
-            let messageId = snapshot.key
-            let messageRef = Database.database().reference().child("messages").child(messageId)
+            let userId = snapshot.key
             
-            messageRef.observeSingleEvent(of: .value, with: { (snapshot) in
+            Database.database().reference().child("user-messages").child(userId).observe(.childAdded, with: { (snapshot) in
+                let messageId = snapshot.key
                 
-                //Below we create a dictionary so that messages can be grouped by who they are from. Then we s
-                if let dictionary = snapshot.value as? [String: AnyObject] {
-                    let message = Message()
-                    message.fromId = dictionary["fromId"] as? String
-                    message.text = dictionary["text"] as? String
-                    message.timeStamp = dictionary["timeStamp"] as? NSNumber
-                    message.toId = dictionary["toId"] as? String
+                
+                let messageRef = Database.database().reference().child("messages").child(messageId)
+                
+                messageRef.observeSingleEvent(of: .value, with: { (snapshot) in
                     
-                    
-                    //Sorting messages by timestamp
-                    if let chatPartnerId = message.chatPartnerId() {
-                        self.messagesDictionary[chatPartnerId] = message
-                        self.messages = Array(self.messagesDictionary.values)
+                    //Below we create a dictionary so that messages can be grouped by who they are from. Then we s
+                    if let dictionary = snapshot.value as? [String: AnyObject] {
+                        let message = Message()
+                        message.fromId = dictionary["fromId"] as? String
+                        message.text = dictionary["text"] as? String
+                        message.timeStamp = dictionary["timeStamp"] as? NSNumber
+                        message.toId = dictionary["toId"] as? String
                         
                         
-                        self.messages.sort(by: { (message1, message2) -> Bool in
-                            return message1.timeStamp!.intValue > message2.timeStamp!.intValue
-                        })
+                        //Sorting messages by timestamp
+                        if let chatPartnerId = message.chatPartnerId() {
+                            self.messagesDictionary[chatPartnerId] = message
+                           
+                        }
+                        
+                        self.attemptReloadTable()
+                        
+                        
                     }
                     
-                    self.timer?.invalidate()
-                    self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.handleReloadTable), userInfo: nil, repeats: false)
-                    
-                }
-                
+                }, withCancel: nil)
             }, withCancel: nil)
-        
-        
+
         }, withCancel: nil)
         
+    }
+    
+    private func attemptReloadTable() {
+        self.timer?.invalidate()
+        self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.handleReloadTable), userInfo: nil, repeats: false)
     }
     
     var timer: Timer?
     
     @objc func handleReloadTable() {
+        self.messages = Array(self.messagesDictionary.values)
+        
+        
+        self.messages.sort(by: { (message1, message2) -> Bool in
+            return message1.timeStamp!.intValue > message2.timeStamp!.intValue
+        })
+        
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }

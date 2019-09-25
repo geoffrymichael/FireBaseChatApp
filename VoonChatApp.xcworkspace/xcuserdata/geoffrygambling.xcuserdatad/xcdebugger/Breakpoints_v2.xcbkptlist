@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "VoonChatApp/Controller/ChatLogController.swift"
-            timestampString = "591081252.1229039"
+            timestampString = "591085136.079766"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
+            startingLineNumber = "111"
+            endingLineNumber = "111"
             landmarkName = "handleShowKeyboard(notification:)"
             landmarkType = "7">
          </BreakpointContent>
