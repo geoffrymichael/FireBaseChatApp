@@ -277,6 +277,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
     @objc func handlePicTap() {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
+        imagePicker.allowsEditing = true
         
         present(imagePicker, animated: true, completion: nil)
  
@@ -284,7 +285,47 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
+        var selectedImage: UIImage?
         
+        
+        if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+            
+            selectedImage = editedImage
+            
+        } else if let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            
+            selectedImage = originalImage
+            
+        }
+        
+        let imageName = NSUUID().uuidString
+        let storageRef = Storage.storage().reference().child("message-images").child("\(imageName).png")
+        
+        if let image = selectedImage {
+            if let uploadData = image.jpegData(compressionQuality: 0.2) {
+                storageRef.putData(uploadData, metadata: nil) { (metadata, error) in
+                    if error != nil {
+                        print(error as Any)
+                        return
+                    }
+                    
+                    storageRef.downloadURL(completion: { (url, error) in
+                        if error != nil {
+                            print(error as Any)
+                            return
+                        }
+                        
+                        //TODO: Finish image message configure
+                        print(url)
+                        
+                    })
+                }
+            }
+           
+        }
+        //        logo.image = selectedImage
+        
+        dismiss(animated: true, completion: nil)
         
         
         print("I selected an image")
