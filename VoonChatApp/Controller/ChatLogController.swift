@@ -316,7 +316,10 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
                         }
                         
                         //TODO: Finish image message configure
-                        print(url)
+                        if let imageUrl = url?.absoluteString {
+                            self.saveMessageWithImageUrl(url: imageUrl)
+                        }
+                        
                         
                     })
                 }
@@ -331,6 +334,39 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         print("I selected an image")
     }
     
+    private func saveMessageWithImageUrl(url: String) {
+        let ref = Database.database().reference().child("messages")
+        let childRef = ref.childByAutoId()
+        
+        
+        guard let toId = user?.id else { return }
+        let fromId = Auth.auth().currentUser!.uid
+        let timeStamp: NSNumber = (Date().timeIntervalSince1970 as AnyObject as! NSNumber)
+        let values = ["imageUrl": url as Any, "toId": toId as Any, "fromId": fromId as Any, "timeStamp": timeStamp] as [String : Any]
+        
+        childRef.updateChildValues(values) { (error, ref) in
+            if error != nil {
+                print(error as Any)
+                return
+            }
+            
+            self.inputTextField.text = nil
+            
+            let messageRef = Database.database().reference().child("user-messages").child(fromId).child(toId)
+            
+            let messageId: String = childRef.key ?? "Default Error"
+            
+            messageRef.updateChildValues([messageId:
+                1])
+            
+            
+            let recipientUserMessageRef = Database.database().reference().child("user-messages").child(toId).child(fromId)
+            
+            recipientUserMessageRef.updateChildValues([messageId: 1])
+            
+        }
+    }
+    
     @objc func handleSend() {
         let ref = Database.database().reference().child("messages")
         let childRef = ref.childByAutoId()
@@ -340,15 +376,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         let fromId = Auth.auth().currentUser!.uid
         let timeStamp: NSNumber = (Date().timeIntervalSince1970 as AnyObject as! NSNumber)
         let values = ["text": inputTextField.text! as Any, "toId": toId as Any, "fromId": fromId as Any, "timeStamp": timeStamp] as [String : Any]
-//        childRef.updateChildValues(values as [AnyHashable : Any])
-//
-//        let messageRef = Database.database().reference().child("user-messages").child(fromId)
-//
-//        let messageId = childRef.key
-//
-//        messageRef.updateChildValues([messageId: "Test"])
-        
-        
+
         childRef.updateChildValues(values) { (error, ref) in
             if error != nil {
                 print(error as Any)
