@@ -48,7 +48,7 @@ class MessagesViewController: UITableViewController {
            
             let userId = snapshot.key
             
-            Database.database().reference().child("user-messages").child(userId).observe(.childAdded, with: { (snapshot) in
+            Database.database().reference().child("user-messages").child(uid).child(userId).observe(.childAdded, with: { (snapshot) in
                 let messageId = snapshot.key
                 
                 
