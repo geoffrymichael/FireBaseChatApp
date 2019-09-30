@@ -45,7 +45,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
                 message.toId = dictionary["toId"] as? String
                 message.text = dictionary["text"] as? String
                 message.timeStamp = dictionary["timeStamp"] as? NSNumber
-                
+                message.imageUrl = dictionary["imageUrl"] as? String
                 
                 //This check is most likely deprecated since we have added a deeper node to relate user converstations
                 if message.chatPartnerId() == self.user?.id {
@@ -171,6 +171,16 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         if let profileImageUrl = self.user?.profiliImageUrl {
             cell.profileImageView.loadImagesUsingCache(url: profileImageUrl)
         }
+
+        if let textImageMessageUrl = message.imageUrl {
+            cell.textImageView.loadImagesUsingCache(url: textImageMessageUrl)
+            cell.textImageView.isHidden = false
+            cell.bubbleView.backgroundColor = UIColor.clear
+        } else {
+            cell.textImageView.isHidden = true
+        }
+        
+
         
         if message.fromId == Auth.auth().currentUser?.uid {
             cell.bubbleView.backgroundColor = ChatMessageCell.blueColor
