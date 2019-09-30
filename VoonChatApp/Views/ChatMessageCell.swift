@@ -76,10 +76,10 @@ class ChatMessageCell: UICollectionViewCell {
         
         bubbleView.addSubview(textImageView)
         
-        bubbleView.leftAnchor.constraint(equalTo: bubbleView.leftAnchor).isActive = true
-        bubbleView.topAnchor.constraint(equalTo: bubbleView.topAnchor).isActive = true
-        bubbleView.heightAnchor.constraint(equalTo: bubbleView.heightAnchor).isActive = true
-        bubbleView.widthAnchor.constraint(equalTo: bubbleView.widthAnchor).isActive = true
+        textImageView.leftAnchor.constraint(equalTo: bubbleView.leftAnchor).isActive = true
+        textImageView.topAnchor.constraint(equalTo: bubbleView.topAnchor).isActive = true
+        textImageView.heightAnchor.constraint(equalTo: bubbleView.heightAnchor).isActive = true
+        textImageView.widthAnchor.constraint(equalTo: bubbleView.widthAnchor).isActive = true
         
         profileImageView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 8).isActive = true
         profileImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
