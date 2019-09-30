@@ -46,6 +46,8 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
                 message.text = dictionary["text"] as? String
                 message.timeStamp = dictionary["timeStamp"] as? NSNumber
                 message.imageUrl = dictionary["imageUrl"] as? String
+                message.imageHeight = dictionary["imageHeight"] as? NSNumber
+                message.imageWidth = dictionary["imageWidth"] as? NSNumber
                 
                 //This check is most likely deprecated since we have added a deeper node to relate user converstations
                 if message.chatPartnerId() == self.user?.id {
@@ -160,8 +162,11 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         
         if let text = message.text {
             cell.bubbleWidthAnchor?.constant = estimatedFrameForText(text: text).width + 32
+        } else if message.imageUrl != nil {
+            
+            cell.bubbleWidthAnchor?.constant = 200
+            
         }
-        
         
         return cell
     }
@@ -176,6 +181,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
             cell.textImageView.loadImagesUsingCache(url: textImageMessageUrl)
             cell.textImageView.isHidden = false
             cell.bubbleView.backgroundColor = UIColor.clear
+            
         } else {
             cell.textImageView.isHidden = true
         }
@@ -203,8 +209,17 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         var height = CGFloat(80)
         
-        if let text = messages[indexPath.item].text {
+        let message = messages[indexPath.item]
+        
+        if let text = message.text {
             height = estimatedFrameForText(text: text).height + 20
+        } else if message.imageUrl != nil {
+            
+            if let imageWidth = message.imageWidth?.floatValue, let imageHeight = message.imageHeight?.floatValue {
+                height = CGFloat(imageHeight / imageWidth * 200)
+                
+            }
+            
         }
         
         
@@ -327,7 +342,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
                         
                         //TODO: Finish image message configure
                         if let imageUrl = url?.absoluteString {
-                            self.saveMessageWithImageUrl(url: imageUrl)
+                            self.saveMessageWithImageUrl(url: imageUrl, image: image)
                         }
                         
                         
@@ -344,7 +359,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         print("I selected an image")
     }
     
-    private func saveMessageWithImageUrl(url: String) {
+    private func saveMessageWithImageUrl(url: String, image: UIImage) {
         let ref = Database.database().reference().child("messages")
         let childRef = ref.childByAutoId()
         
@@ -352,7 +367,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         guard let toId = user?.id else { return }
         let fromId = Auth.auth().currentUser!.uid
         let timeStamp: NSNumber = (Date().timeIntervalSince1970 as AnyObject as! NSNumber)
-        let values = ["imageUrl": url as Any, "toId": toId as Any, "fromId": fromId as Any, "timeStamp": timeStamp] as [String : Any]
+        let values = ["toId": toId as Any, "fromId": fromId as Any, "timeStamp": timeStamp, "imageUrl": url as Any, "imageHeight" : image.size.height as NSNumber, "imageWidth": image.size.width as NSNumber] as [String : Any]
         
         childRef.updateChildValues(values) { (error, ref) in
             if error != nil {
