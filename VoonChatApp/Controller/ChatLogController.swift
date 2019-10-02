@@ -54,14 +54,13 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
                     self.messages.append(message)
                     DispatchQueue.main.async {
                         self.collectionView.reloadData()
+                        let indexPath = IndexPath(item: self.messages.count - 1, section: 0)
+                        self.collectionView.scrollToItem(at: indexPath, at: .bottom, animated: true)
                     }
                     
                 }
                 
-                
-                
-                
-                
+
                 
             }, withCancel: nil)
             
@@ -104,10 +103,11 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
     }
     
     func setupKeyboardObservers() {
+        
         NotificationCenter.default.addObserver(self, selector: #selector(handleShowKeyboard), name: UIResponder.keyboardDidShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleHideKeyboard), name: UIResponder.keyboardDidHideNotification, object: nil)
     }
-
+    
     var keyboardIsPresent = false
     
     @objc func handleShowKeyboard(notification: NSNotification) {
