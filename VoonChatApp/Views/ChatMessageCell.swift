@@ -34,6 +34,8 @@ class ChatMessageCell: UICollectionViewCell {
         view.layer.masksToBounds = true
         
         
+        
+        
         return view
         
     }()
@@ -49,6 +51,8 @@ class ChatMessageCell: UICollectionViewCell {
         return imageView
     }()
     
+    
+    //TODO: Implement zooming and touch gestures 
     let textImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 16
