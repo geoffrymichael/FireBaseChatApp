@@ -177,17 +177,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
             cell.profileImageView.loadImagesUsingCache(url: profileImageUrl)
         }
 
-        if let textImageMessageUrl = message.imageUrl {
-            cell.textImageView.loadImagesUsingCache(url: textImageMessageUrl)
-            cell.textImageView.isHidden = false
-            cell.bubbleView.backgroundColor = UIColor.clear
-            
-        } else {
-            cell.textImageView.isHidden = true
-        }
-        
-
-        
+      
         if message.fromId == Auth.auth().currentUser?.uid {
             cell.bubbleView.backgroundColor = ChatMessageCell.blueColor
             cell.textView.textColor = UIColor.white
@@ -204,6 +194,16 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
             cell.bubbleViewLeftAnchor?.isActive = true
             cell.profileImageView.isHidden = false
         }
+        
+        if let textImageMessageUrl = message.imageUrl {
+            cell.textImageView.loadImagesUsingCache(url: textImageMessageUrl)
+            cell.textImageView.isHidden = false
+            cell.bubbleView.backgroundColor = UIColor.clear
+            
+        } else {
+            cell.textImageView.isHidden = true
+        }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
