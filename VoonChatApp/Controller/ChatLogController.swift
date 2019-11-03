@@ -200,6 +200,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
             cell.textImageView.isHidden = false
             cell.bubbleView.backgroundColor = UIColor.clear
             
+            
         } else {
             cell.textImageView.isHidden = true
         }

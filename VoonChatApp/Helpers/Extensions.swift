@@ -12,9 +12,13 @@ import UIKit
 
 let imageCache = NSCache<AnyObject, AnyObject>()
 
-extension UIImageView{
+class CustomImageView: UIImageView {
+    
+    var imageUrlString: String?
     
     func loadImagesUsingCache(url: String?, tableView: UITableView? = nil) {
+        
+        imageUrlString = url
         
         self.image = nil
         
@@ -29,7 +33,11 @@ extension UIImageView{
                     if let downloadedImage = UIImage(data: data) {
                         DispatchQueue.main.async {
                             imageCache.setObject(downloadedImage, forKey: url as AnyObject)
-                            self.image = downloadedImage
+                            
+                            if self.imageUrlString == url {
+                                self.image = downloadedImage
+                            }
+                           
                             tableView?.reloadData()
                         }
                     }

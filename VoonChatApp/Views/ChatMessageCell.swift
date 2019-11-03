@@ -40,8 +40,8 @@ class ChatMessageCell: UICollectionViewCell {
         
     }()
     
-    let profileImageView: UIImageView = {
-        let imageView = UIImageView()
+    let profileImageView: CustomImageView = {
+        let imageView = CustomImageView()
         imageView.layer.cornerRadius = 16
         imageView.layer.masksToBounds = true
         imageView.contentMode = .scaleAspectFill
@@ -53,8 +53,8 @@ class ChatMessageCell: UICollectionViewCell {
     
     
     //TODO: Implement zooming and touch gestures 
-    let textImageView: UIImageView = {
-        let imageView = UIImageView()
+    let textImageView: CustomImageView = {
+        let imageView = CustomImageView()
         imageView.layer.cornerRadius = 16
         imageView.layer.masksToBounds = true
         imageView.contentMode = .scaleAspectFill

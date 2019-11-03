@@ -202,7 +202,7 @@ class MessagesViewController: UITableViewController {
         containerView.translatesAutoresizingMaskIntoConstraints = false
         
         
-        let profileImageView = UIImageView()
+        let profileImageView = CustomImageView()
         profileImageView.layer.cornerRadius = 20
         profileImageView.clipsToBounds = true
     
